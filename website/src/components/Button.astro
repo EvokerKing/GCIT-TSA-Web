@@ -6,24 +6,17 @@ interface Props {
 const { href = null, onclick = null } = Astro.props
 ---
 
-<surrounding-script data-href={href} data-onclick={onclick}><button><slot /></button></surrounding-script>
+<button><slot /></button>
 
-<script>
-	customElements.define(
-		"surrounding-script",
-		class extends HTMLElement {
-			connectedCallback() {
-				this.querySelector("button")?.addEventListener("click", () => {
-					if (this.dataset.onclick != null) {
-						eval(this.dataset.onclick)
-					}
-					if (this.dataset.href != null) {
-						window.location.href = this.dataset.href
-					}
-				})
-			}
+<script is:inline define:vars={{"href": href, "onclick": onclick}}>
+	document.querySelector("button")?.addEventListener("click", () => {
+		if (onclick != null) {
+			eval(onclick)
 		}
-	)
+		if (href != null) {
+			window.location.href = href
+		}
+	})
 </script>
 
 <style>
@@ -39,6 +32,7 @@ const { href = null, onclick = null } = Astro.props
 		align-items: center;
 		gap: 32px;
 		height: 48px;
+		cursor: pointer;
 	}
 	
 	button:hover {
