@@ -1,0 +1,39 @@
+---
+import Layout from "./Layout.astro"
+const { frontmatter } = Astro.props
+---
+
+<Layout title={frontmatter.title}>
+	<main>
+		<div>
+			<slot />
+		</div>
+	</main>
+
+	<style is:global>
+		main > div {
+			width: 100%;
+			max-width: 750px;
+			padding: 32px;
+			box-sizing: border-box;
+		}
+
+		main {
+			width: 100%;
+			display: flex;
+			justify-content: center;
+			align-items: center;
+		}
+		
+		p > img {
+			width: 100%;
+			align-self: center;
+		}
+
+		@media (width < 400px) {
+			main > div {
+				padding: 16px;
+			}
+		}
+	</style>
+</Layout>
