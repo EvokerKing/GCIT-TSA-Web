@@ -1,0 +1,17 @@
+---
+import { getCollection, render } from 'astro:content'
+import LayoutMD from "../../layouts/LayoutMD.astro";
+export async function getStaticPaths() {
+	const posts = await getCollection("news")
+	return posts.map((item: any) => ({
+		params: { post: item.id }, props: { item }
+	}))
+}
+
+const { item } = Astro.props
+const { Content } = await render(item)
+---
+
+<LayoutMD frontmatter={item.data}>
+	<Content />
+</LayoutMD>
