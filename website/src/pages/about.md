@@ -1,5 +1,5 @@
 ---
-layout: ../../layouts/LayoutMD.astro
+layout: ../layouts/LayoutMD.astro
 title: About GCIT TSA
 ---
 

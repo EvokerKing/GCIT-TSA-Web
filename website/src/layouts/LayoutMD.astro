@@ -4,7 +4,7 @@ const { frontmatter } = Astro.props
 ---
 
 <Layout title={frontmatter.title}>
-	<main>
+	<main transition:animate="slide">
 		<div>
 			<slot />
 		</div>

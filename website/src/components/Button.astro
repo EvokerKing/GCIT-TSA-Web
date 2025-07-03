@@ -4,26 +4,9 @@ interface Props {
 	onclick?: string
 }
 const { href = null, onclick = null } = Astro.props
-const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz'
-let token = ''
-const charactersLength = characters.length
-for (let i = 0; i < 10; i++) {
-	token += characters.charAt(Math.floor(Math.random() * charactersLength))
-}
 ---
 
-<button id={token}><slot /></button>
-
-<script is:inline define:vars={{"href": href, "onclick": onclick, "token": token}}>
-	document.querySelector(`button#${token}`).addEventListener("click", () => {
-		if (onclick != null) {
-			eval(onclick)
-		}
-		if (href != null) {
-			window.location.href = href
-		}
-	})
-</script>
+<a href={href}><button onclick={onclick}><slot /></button></a>
 
 <style>
 	button {
@@ -43,5 +26,9 @@ for (let i = 0; i < 10; i++) {
 	
 	button:hover {
 		background: #0353E9;
+	}
+
+	a {
+		text-decoration: none;
 	}
 </style>
