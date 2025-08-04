@@ -3,7 +3,12 @@ import Layout from "../layouts/Layout.astro"
 import Button from "../components/Button.astro"
 import { getCollection } from "astro:content";
 
-const posts = await getCollection("news")
+let posts = await getCollection("news")
+posts = posts.sort((a, b) => {
+	const aD = new Date(a.data.date).getTime()
+	const bD = new Date(b.data.date).getTime()
+	return bD - aD
+})
 ---
 
 <Layout title="GCIT TSA">
