@@ -1,0 +1,129 @@
+---
+import Layout from "../layouts/Layout.astro"
+import comps from "../assets/comps.json"
+import Button from "../components/Button.astro"
+---
+
+<Layout title="TSA Competitions">
+	<main>
+		<div>
+			<h1>List of Competitions</h1>
+
+			<br>
+
+			<div class="container">
+				<div class="toolbar">
+					<p class="title">TSA High School Competitions</p>
+					<p class="sub">More information will be added over time</p>
+					<div class="right">
+						<Button disabled>Take Quiz (coming soon)</Button>
+					</div>
+				</div>
+				<table>
+					<thead>
+						<th style="width: 350px;"><p>Competition Name</p></th>
+					</thead>
+					{comps.map(i =>
+							<tr class="row">
+								<td>
+									<p>{i}</p>
+								</td>
+							</tr>
+					)}
+				</table>
+			</div>
+		</div>
+	</main>
+
+	<style>
+		main > div {
+			width: 100%;
+			max-width: 750px;
+			padding: 32px;
+			box-sizing: border-box;
+		}
+
+		main {
+			width: 100%;
+			display: flex;
+			justify-content: center;
+			align-items: center;
+		}
+
+		@media (width < 400px) {
+			main > div {
+				padding: 16px;
+			}
+		}
+		
+		.container {
+			background: #393939;
+		}
+
+		.title {
+			color: #F4F4F4;
+			font-size: 20px;
+			font-weight: 400;
+			padding-top: 16px;
+		}
+
+		.sub {
+			color: #C6C6C6;
+		}
+
+		table {
+			width: 100%;
+		}
+		
+		thead {
+			background: #525252;
+			color: #F4F4F4;
+			height: 40px;
+		}
+
+		th {
+			padding: 0;
+		}
+		
+		th > p {
+			text-align: left;
+			font-size: 14px;
+			font-weight: 600;
+		}
+		
+		th:hover {
+			background: #656565;
+		}
+
+		td {
+			color: #C6C6C6;
+			border-bottom: 1px inset #525252;
+			height: 40px;
+			padding: 0;
+		}
+
+		td > p {
+			font-size: 14px;
+			font-weight: 400;
+		}
+
+		tr {
+			width: 100%;
+		}
+
+		tr:hover {
+			background: #474747;
+			color: #F4F4F4;
+		}
+
+		p {
+			margin: 0 16px;
+		}
+
+		.right {
+			display: flex;
+			flex-direction: row;
+			justify-content: end;
+		}
+	</style>
+</Layout>

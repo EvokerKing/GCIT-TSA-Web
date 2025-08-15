@@ -1,14 +1,25 @@
 ---
 interface Props {
 	href?: string,
-	onclick?: string
+	onclick?: string,
+	disabled?: boolean
 }
-const { href = null, onclick = null } = Astro.props
+const { href = null, onclick = null, disabled = false } = Astro.props
 ---
 
-<a href={href}><button onclick={onclick}><slot /></button></a>
+<a href={href}><button disabled={disabled} onclick={onclick}><slot /></button></a>
 
 <style>
+	button:disabled {
+		background: #6F6F6F;
+		color: #FFFFFF3F;
+	}
+
+	button:disabled:hover {
+		background: #6F6F6F;
+		cursor: default;
+	}
+
 	button {
 		background: #0F62FE;
 		color: #FFFFFF;
