@@ -21,19 +21,44 @@ import Button from "../components/Button.astro"
 				</div>
 				<table>
 					<thead>
-						<th style="width: 350px;"><p>Competition Name</p></th>
+						<th style="width: 44px; box-sizing: border-box"></th>
+						<th><p>Competition Name</p></th>
 					</thead>
 					{comps.map(i =>
-							<tr class="row">
-								<td>
-									<p>{i}</p>
-								</td>
-							</tr>
+						<tr class="row">
+							<td class="dropdown">
+								<button onclick={`dropdown("${i.name.toLowerCase().replaceAll(/[ (),-]/gm, "")}")`} id={`dropdown-${i.name.toLowerCase().replaceAll(/[ (),-]/gm, "")}`} class="not-expanded">
+									<svg version="1.1" id="icon" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" height="16px" width="16px" fill="#FFFFFF" viewBox="0 0 32 32" style="enable-background:new 0 0 32 32;" xml:space="preserve"><style type="text/css">.st0{fill:none;}</style><polygon points="16,22 6,12 7.4,10.6 16,19.2 24.6,10.6 26,12 "/><rect id="_x3C_Transparent_Rectangle_x3E_" class="st0" width="32" height="32"/></svg>
+								</button>
+							</td>
+							<td>
+								<p>{i.name}</p>
+							</td>
+						</tr>
+						<tr id={"competition-" + i.name.toLowerCase().replaceAll(/[ (),-]/gm, "")} class="not-expanded">
+							<td colspan="2" class="panel">
+								<p>{i.desc}</p>
+							</td>
+						</tr>
 					)}
 				</table>
 			</div>
 		</div>
 	</main>
+
+	<script is:inline>
+		function dropdown(id) {
+			const row = document.querySelector(`#competition-${id}`)
+			const dropdown = document.querySelector(`#dropdown-${id}`)
+			if (row.classList.contains("expanded")) {
+				row.classList.replace("expanded", "not-expanded")
+				dropdown.classList.replace("expanded", "not-expanded")
+			} else if (row.classList.contains("not-expanded")) {
+				row.classList.replace("not-expanded", "expanded")
+				dropdown.classList.replace("not-expanded", "expanded")
+			}
+		}
+	</script>
 
 	<style>
 		main > div {
@@ -124,6 +149,43 @@ import Button from "../components/Button.astro"
 			display: flex;
 			flex-direction: row;
 			justify-content: end;
+		}
+
+		.panel {
+			padding: 16px 16px 24px 48px;
+		}
+
+		tr.not-expanded {
+			height: 0 !important;
+			display: none;
+		}
+
+		button.not-expanded {
+			rotate: 0deg;
+		}
+		
+		tr.expanded {
+			height: fit-content !important;
+		}
+
+		button.expanded {
+			rotate: 180deg;
+		}
+
+		.dropdown {
+			width: 44px;
+			box-sizing: border-box;
+			padding: 7px;
+		}
+
+		button {
+			background: none;
+			border: none;
+			padding: 0 7px;
+			display: flex;
+			justify-content: center;
+			align-items: center;
+			cursor: pointer;
 		}
 	</style>
 </Layout>
